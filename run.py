@@ -7,7 +7,7 @@ from groq import Groq
 from swarm import Swarm, Agent
 from swarm.repl import run_demo_loop
 
-from agents import delegator
+from new_agents.DelegatorAgent import delegator_agent
 from utils.swarm_utils import pretty_print_messages, process_and_print_streaming_response
 
 # Initialize colorama for cross-platform colored output
@@ -51,7 +51,7 @@ client = Swarm(client=llm)
 # Main execution
 if __name__ == "__main__":
     messages = []
-    agent = delegator
+    agent = delegator_agent
 
     # Uncomment one of the following lines to run the desired loop
     # run_demo_loop_local(client=client, starting_agent=agent, stream=True)

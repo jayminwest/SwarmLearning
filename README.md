@@ -1,10 +1,7 @@
-## Installing Swarm:
-
-pip install git+https://github.com/openai/swarm.git
-
+```markdown
 # Knowledge Management Swarm
 
-Welcome to the **Knowledge Management Swarm**, a sophisticated system designed to manage and organize your Zettelkasten markdown notes using AI-driven agents. This project leverages the power of OpenAI's Swarm library to create a swarm of specialized agents that collaboratively handle various aspects of knowledge management, ensuring efficient organization, retrieval, and learning from your notes.
+Welcome to the **Knowledge Management Swarm**, a sophisticated system designed to manage and organize your Zettelkasten Markdown notes using AI-driven agents. This project leverages OpenAI's Swarm library to create a swarm of specialized agents that collaboratively handle various aspects of knowledge management, ensuring efficient organization, retrieval, and learning from your notes.
 
 ## Table of Contents
 - [Project Overview](#project-overview)
@@ -16,6 +13,9 @@ Welcome to the **Knowledge Management Swarm**, a sophisticated system designed t
     - [Collector](#collector)
     - [Teacher](#teacher)
   - [Utilities](#utilities)
+    - [File Operations](#file-operations)
+    - [Swarm Utilities](#swarm-utilities)
+    - [Agent Utilities](#agent-utilities)
 - [Functionality](#functionality)
 - [Setup and Installation](#setup-and-installation)
 - [Usage](#usage)
@@ -28,7 +28,7 @@ The Knowledge Management Swarm is built around the Zettelkasten method, a system
 
 ## Directory Structure
 
-```
+```plaintext
 ├── agents
 │   ├── __init__.py
 │   ├── collector.py
@@ -70,7 +70,7 @@ The project defines a set of agents, each responsible for specific tasks within 
   - Determines the nature of each request.
   - Assigns tasks to the appropriate agents (Teacher, Organizer, Collector).
   - Communicates exclusively with other agents, not performing tasks directly.
-
+  
 **Key Features:**
 - Utilizes functions to transfer tasks to other agents (`transfer_to_teacher`, `transfer_to_organizer`, `transfer_to_collector`).
 - Maintains awareness of the directory structure for effective task delegation.
@@ -78,13 +78,13 @@ The project defines a set of agents, each responsible for specific tasks within 
 #### Organizer
 
 - **File:** `agents/organizer.py`
-- **Role:** Structures and categorizes the user's Zettelkasten markdown notes.
+- **Role:** Structures and categorizes the user's Zettelkasten Markdown notes.
 - **Responsibilities:**
   - Manages unique IDs for notes.
   - Links related notes.
   - Handles tags from the "3 - Tags" directory.
   - Assigns notes to appropriate folders based on content.
-
+  
 **Key Features:**
 - Accesses and creates note files using functions like `read_note_file` and `create_note_file`.
 - Familiar with all directories within the `Notes` folder to ensure proper categorization.
@@ -92,26 +92,26 @@ The project defines a set of agents, each responsible for specific tasks within 
 #### Collector
 
 - **File:** `agents/collector.py`
-- **Role:** Ingests and collects user information into Zettelkasten markdown notes.
+- **Role:** Ingests and collects user information into Zettelkasten Markdown notes.
 - **Responsibilities:**
   - Handles data entry from "1 - Rough Notes" and "2 - Source Material".
   - Performs metadata tagging.
   - Parses content from various inputs (text, PDFs, media).
-  - Converts inputs into structured markdown in "6 - Full Notes".
+  - Converts inputs into structured Markdown in "6 - Full Notes".
   - Assigns unique IDs to new notes and links them to existing ones.
-
+  
 **Key Features:**
 - Utilizes functions like `read_note_file` and `list_notes` to manage note files effectively.
 
 #### Teacher
 
 - **File:** `agents/teacher.py`
-- **Role:** Assists the user in internalizing and learning from their markdown notes.
+- **Role:** Assists the user in internalizing and learning from their Markdown notes.
 - **Responsibilities:**
   - Creates learning plans based on content from "6 - Full Notes".
   - Generates quizzes and flashcards for key concepts.
   - Extracts key concepts from "Main Notes" and relevant tags.
-
+  
 **Key Features:**
 - Leverages functions like `read_note_file` and `list_notes` to access and utilize note content for educational purposes.
 
@@ -121,25 +121,28 @@ The project defines a set of agents, each responsible for specific tasks within 
 
 - **File:** `utils/file_operations.py`
 - **Purpose:** Handles all file-related operations within the `Notes` directory.
-- **Key Functions:**
-  - `read_note_file(folder, filename)`: Reads the contents of a specific note.
-  - `create_note_file(folder, filename, content)`: Creates a new note file in the specified folder.
-  - `list_notes(folder)`: Lists all markdown files in the specified folder.
+  
+**Key Functions:**
+- `read_note_file(folder, filename)`: Reads the contents of a specific note.
+- `create_note_file(folder, filename, content)`: Creates a new note file in the specified folder.
+- `list_notes(folder)`: Lists all Markdown files in the specified folder.
 
 #### Swarm Utilities
 
 - **File:** `utils/swarm_utils.py`
 - **Purpose:** Provides helper functions for interacting with the swarm and processing responses.
-- **Key Functions:**
-  - `pretty_print_messages(messages)`: Formats and displays messages from agents.
-  - `process_and_print_streaming_response(response)`: Handles and displays streaming responses from the swarm.
+  
+**Key Functions:**
+- `pretty_print_messages(messages)`: Formats and displays messages from agents.
+- `process_and_print_streaming_response(response)`: Handles and displays streaming responses from the swarm.
 
 #### Agent Utilities
 
 - **File:** `utils/agent_utils.py`
 - **Purpose:** Converts function definitions to schemas compatible with the swarm framework.
-- **Key Functions:**
-  - `function_to_schema(func)`: Transforms a Python function into a schema dictionary, mapping parameter types appropriately.
+  
+**Key Function:**
+- `function_to_schema(func)`: Transforms a Python function into a schema dictionary, mapping parameter types appropriately.
 
 ## Functionality
 
@@ -150,28 +153,35 @@ The project defines a set of agents, each responsible for specific tasks within 
 
 ## Setup and Installation
 
-1. **Clone the Repository:**
-   ```bash
-   git clone https://github.com/yourusername/knowledge-management-swarm.git
-   cd knowledge-management-swarm
-   ```
+### 1. Clone the Repository
 
-2. **Install Dependencies:**
-   Ensure you have Python installed. Then, install the necessary packages:
-   ```bash
-   pip install -r requirements.txt
-   ```
-   *Note: If `requirements.txt` is not present, install the Swarm library directly:*
-   ```bash
-   pip install git+https://github.com/openai/swarm.git
-   ```
+```bash
+git clone https://github.com/yourusername/knowledge-management-swarm.git
+cd knowledge-management-swarm
+```
 
-3. **Configure Environment:**
-   - Create a `.env` file in the root directory to store environment variables like API keys.
-   - Ensure the `Notes` directory structure is intact as per the project requirements.
+### 2. Install Dependencies
 
-4. **Initialize Swarm:**
-   The `run.py` script initializes the swarm with the Delegator agent and sets up the interaction loop.
+Ensure you have Python installed. Then, install the necessary packages:
+
+```bash
+pip install -r requirements.txt
+```
+
+*Note: If `requirements.txt` is not present, install the Swarm library directly:*
+
+```bash
+pip install git+https://github.com/openai/swarm.git
+```
+
+### 3. Configure Environment
+
+- Create a `.env` file in the root directory to store environment variables like API keys.
+- Ensure the `Notes` directory structure is intact as per the project requirements.
+
+### 4. Initialize Swarm
+
+The `run.py` script initializes the swarm with the Delegator agent and sets up the interaction loop.
 
 ## Usage
 
@@ -181,9 +191,9 @@ Run the main script to start interacting with the Knowledge Management Swarm:
 python run.py
 ```
 
-- **Commands:**
-  - **Interact:** Type your queries or inputs when prompted.
-  - **Exit:** Type `exit` to terminate the chat session.
+**Commands:**
+- **Interact:** Type your queries or inputs when prompted.
+- **Exit:** Type `exit` to terminate the chat session.
 
 **Example Interaction:**
 ```
@@ -202,17 +212,23 @@ Contributions are welcome! Please follow these steps:
 
 1. **Fork the Repository**
 2. **Create a Feature Branch**
-   ```bash
-   git checkout -b feature/YourFeature
-   ```
+
+    ```bash
+    git checkout -b feature/YourFeature
+    ```
+
 3. **Commit Your Changes**
-   ```bash
-   git commit -m "Add your feature"
-   ```
+
+    ```bash
+    git commit -m "Add your feature"
+    ```
+
 4. **Push to the Branch**
-   ```bash
-   git push origin feature/YourFeature
-   ```
+
+    ```bash
+    git push origin feature/YourFeature
+    ```
+
 5. **Open a Pull Request**
 
 Please ensure that your code follows the project's coding standards and that all tests pass.
@@ -220,3 +236,5 @@ Please ensure that your code follows the project's coding standards and that all
 ## License
 
 This project is licensed under the [MIT License](LICENSE).
+
+```
