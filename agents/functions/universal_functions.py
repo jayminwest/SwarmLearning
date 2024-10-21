@@ -13,3 +13,12 @@ def transfer_to_collector(text=""):
 def transfer_to_teacher(text=""):
     from ..teacher import teacher
     return teacher
+
+def update_note_file(folder, filename, content):
+    from utils.file_operations import update_note_file
+    return update_note_file(folder, filename, content)
+
+def search_notes(folder, query):
+    from utils.file_operations import search_notes
+    return search_notes(folder, query)
+
